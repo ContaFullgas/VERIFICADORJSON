@@ -1,0 +1,125 @@
+.titulo {
+    /*background-color: red; /* Color de fondo del título */
+    color: white; /* Color del texto del título */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    font-family: sans-serif ;
+    text-align: center;
+    
+}
+
+#dropAreaEstilos {
+    border: 2px dashed #0087F7;
+    border-radius: 20px;
+    /* width: 400px; */
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0087F7;
+    margin-bottom: 20px;
+    font-size: 22px;
+    margin-top: 50px;
+}
+
+.contenido {
+   /* background-color: #FF0000; /* Color de fondo del contenido */
+    color:	white; /* Color del texto del contenido */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    margin-bottom: 5px; /* Margen superior */
+    width: 500px;
+    font-size: 20px;
+}
+.titulo1 {
+    background-color: #72ddf7; /* Color de fondo del título */
+    color: white; /* Color del texto del título */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    font-family: sans-serif;
+   
+}
+.contenido2 {
+    background-color: #0a0908; /* Color de fondo del contenido */
+    color: white; /* Color del texto del contenido */
+    padding: 5px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    margin-bottom: 5px; /* Margen superior */
+    
+}
+.textarea{
+    width: 100%;
+    height: 100%;
+}
+.contenido3{
+    color:	black (248, 248, 248); /* Color del texto del contenido */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    margin-bottom: 5px; /* Margen superior */
+    width: 500px;
+    font-family: sans-serif;
+    font-size: 15px;
+ 
+}
+
+/* clase para ocultar elementos */
+.oculto{
+    display: none;
+}
+
+.swal2-popup {
+    box-shadow: none !important; /* Elimina la sombra */
+    padding: 5px !important; /* Elimina el padding extra */
+    background: #5dade2 !important; 
+    /* border: 5px solid #0a0908 !important; Borde de 5px  */
+    border-radius: 10px !important; /* Bordes redondeados */
+    font-family: sans-serif;
+    color: #0a0908;
+  }
+  
+  /* Personaliza el icono para que no se vea afectado */
+  .swal2-icon {
+    background: #d35400!important; /*  fondo del icono */
+    box-shadow: none !important; /* Elimina la sombra del icono */
+    border: 4px solid #0a0908!important; /* Borde de 4px  */
+    border-radius: 50% !important; /* Hacer el borde redondeado */
+  
+  }
+  
+  .swal2-header {
+    background-color:#5dade2 ;
+    /* border: 4px solid #0a0908; Borde de 4px  */
+  }
+ /* Agrega animación de rotación */
+/*@keyframes rotate {
+  0% { transform: rotate(0deg); }*/
+ /* 100% { transform: rotate(360deg); }*/
+/*}*/
+
+/*.swal2-icon {
+  animation: rotate 2s ease-in-out;
+
+}*/
+.celda:hover {
+  background-color: #0582CA!important; /* Cambiar el fondo al pasar el mouse */
+  color: #ffffff !important; /* Cambiar el color del texto */
+  cursor: pointer; /* Cambiar el cursor a mano para indicar que es interactivo */
+  transition: all 0.3s ease; /* Agrega una transición suave */
+}
+
+body{
+  height: 230vh;
+}
+
+.footer-logo {
+  width: 100px; /* Ajusta el tamaño según lo necesites */
+}
+.footer-logo {
+  width: 8%; /* 20% del ancho del footer */
+}
+
+@media (max-width: 768px) {
+  .footer-logo {
+    width: 100px; /* Para pantallas más pequeñas, puedes establecer un tamaño fijo */
+  }
+}

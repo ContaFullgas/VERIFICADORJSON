@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- variables para usar boostrap y jquery -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="funciones.min.js" defer></script>
+    <title>PROGRAMA JSON</title>
+</head>
+<body style="background-color: #003554;">
+    <header class="p-2 text-bg-white" style="background-color: white;">
+        <div class="container p-1">
+            <div class="d-flex flex-wrap align-items-center justify-content-center" style="position: relative; height: 50px;"> <!-- Ajusta la altura según sea necesario -->
+                <div class="verificador fw-bold fs-3" style="color: #003554; font-family: sans-serif;">VERIFICADOR DE JSON</div>
+                <div class="position-absolute bottom-5 start-0"> <!-- Coloca el logo en la esquina inferior derecha -->
+                    <img class="p-2" src="logo/image003.jpeg" alt="logoFullgas" style="max-width: 200px; max-height: 200px;"> <!-- Ajusta el tamaño según sea necesario -->
+                </div>
+                <div class="position-absolute bottom-0 end-0"> <!-- Coloca la fecha en la esquina inferior derecha -->
+                    <div class="date fw-bold mt-5" style="font-family: sans-serif; color: #003554;" id="current-date"></div>
+                </div>
+        </div>
+
+    </header>
+
+    <div id="dropArea" class="container mt-5 mb-5 col-sm-8 col-md-8 col-lg-10 mt-3">
+        <!--  -->
+        <!-- Etiquetas HTML -->
+        <div id="dropAreaEstilos">Arrastra y suelta tu archivo ZIP aquí</div>
+
+        <!-- <label><input type="file" id="adjuntarArchivo"></label> -->
+        <label><input type="file" id="adjuntarArchivo" class=" "></label>
+        <!-- <label for="photos">Seleccionar imágenes</label> -->
+        <!--  -->
+    </div>    
+    
+    <!-- contenedor que muestra los datos de las tablas si el JSON es correcto -->
+    <div id="tablaDatosJson" class="container mt-5 mb-5 col-sm-8 col-md-8 col-lg-10 mt-3 oculto">
+
+        <div class=" row  mt-1 g-1  border border-3 border-dark p-2 rounded-4" style="background-color: #0a0908;">
+            <div class="h-70 row  mt-1 g-1  p-2 border rounded-4" style="background-color: #0582CA;">
+                <h2 id="fechaDelArchivo" class="textborder col-12  mt-1  fw-bold" style=" font-family:sans-serif ; color: #2b2c28;">LA FECHA DEL ARCHIVO ES:</h2> 
+                <div class="col-sm-4 col-md-4 col-lg-4 mt-3">
+                    <h4 class="titulo1  mt-3 border border-dark" style="color: black;">La suma del volumen compra es:</h4>
+                    <p id="sumaVolumenCompras" class=" p-3 border border-dark border-3 rounded-3" style="background-color: #E3F2FD;"></p>
+                </div>
+                <div class=" col-sm-4 col-md-4 col-lg-4 mt-3">
+                    <h4  class="titulo1  mt-3 border border-dark" style="color: black;">La suma del volumen venta es:</h4>
+                    <p id="sumaVolumenVentas" class=" p-3 border border-dark border-3 rounded-3" style="background-color: #E3F2FD;"></p>
+                </div >
+                <div class="col-sm-4 col-md-4 col-lg-4 mt-3">
+                    <h4  class="titulo1  mt-3 border border-dark" style="color: black;">la suma de importe venta es:</h4>
+                    <p id="sumaImporteVentas" class=" p-3 border border-dark border-3 rounded-3" style="background-color: #E3F2FD;"></p>
+                </div>
+            </div>
+        </div>
+           <div class="contenido2 row  mt-3 g-1 border border-3 border-dark p-2 rounded-4">
+                <div class="h-70 row  mt-1 g-1 border border-3 border-dark p-3 rounded-4 " style="background-color:#0582CA ;">
+                    <h2 class="textborder col-12 text-center mt-1 fw-bold" style="font-family:sans-serif ; color: #2b2c28 ; ">POR COMBUSTIBLE</h2> 
+                    <div class="col-md-4 " >
+                        <h2 id="magnaTitulo" class="titulo  mt-3 border border-white " style="background-color: #008000;">MAGNA</h2>
+                        <div class="row justify-content-center g-0">
+                            <div class="col-6 d-flex justify-content-center border border-dark border-3 " style="background-color: #008000; ">
+                                <p  class="contenido3  "  >El volumen compra es:</p>
+                            </div>
+                            <div class="col-6 d-flex justify-content-start border border-dark border-3 " style="background-color: #E3F2FD;">
+                                <p id="volumenComprasMagna" class="contenido3" style="color: black;" ></p>
+                            </div>
+                            <div class="col-6 d-flex justify-content-center border border-dark border-3 " style="background-color: #008000;">
+                                <p  class="contenido3" >El volumen venta es:</p>
+                            </div>
+                            <div class="col-6 d-flex justify-content-center border border-dark border-3" style="background-color: #E3F2FD;">
+                                <p id="volumenVentasMagna" class="contenido3 " style="color: black;" ></p>
+                            </div>
+                            <div class="col-6 d-flex justify-content-center border border-dark border-3 " style="background-color: #008000;">
+                                <p  class="contenido3" >El importe venta es:</p>
+                            </div>
+                            <div class="col-6 d-flex justify-content-center border border-dark border-3 " style="background-color: #E3F2FD;">
+                                <p id="importeVentasMagna" class="contenido3 " style="color: black;" ></p>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="col-md-4  ">
+                            <h2 id="premiumTitulo" class="titulo mt-3 border border-white " style="background-color: #d90429;">PREMIUM</h2>
+                            <div class="row justify-content-center g-0 "><!--elimina el espaciado entre los contenidos con g-0-->
+                                <div class="col-6 d-flex justify-content-center border border-dark border-3" style="background-color: #d90429;">
+                                    <p  class="contenido3" >El volumen compra es:</p>
+                                </div>
+                                <div class="col-6 d-flex justify-content-start border border-dark border-3 " style="background-color: #E3F2FD;">
+                                    <p id="volumenComprasPremium" class="contenido3" style="color: black;"></p>
+                                </div>
+                                <div class="col-6 d-flex justify-content-center border border-dark border-3" style="background-color: #d90429;">
+                                    <p  class="contenido3" >El volumen venta es:</p>
+                                </div>
+                                <div class="col-6 d-flex justify-content-center border border-dark border-3 " style="background-color: #E3F2FD;">
+                                    <p id="volumenVentasPremium" class="contenido3" style="color: black;"></p>
+                                </div>
+                                <div class="col-6 d-flex justify-content-center border border-dark border-3" style="background-color: #d90429;">
+                                    <p  class="contenido3" >El importe venta es:</p>
+                                </div>
+                                <div class="col-6 d-flex justify-content-center border border-dark border-3 " style="background-color: #E3F2FD;">
+                                    <p id="importeVentasPremium" class="contenido3 " style="color: black;"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4  ">
+                            <h2 id="dieselTitulo" class="titulo bg-dark mt-3 border border-white ">DIESEL</h2>
+                            <div class="row justify-content-center g-0 "><!--elimina el espaciado entre los contenidos con g-0-->
+                                <div class="col-6 d-flex justify-content-center border border-dark border-3" style="background-color: #0a0908;">
+                                    <p  class="contenido3">El volumen compra es:</p>
+                                </div>
+                                <div class="col-6 d-flex justify-content-start border border-dark border-3 " style="background-color: #E3F2FD;" >
+                                    <p id="volumenComprasDiesel" class="contenido3" style="color: black;"></p>
+                                </div>
+                                <div class="col-6 d-flex justify-content-center border border-dark border-3" style="background-color: #0a0908;">
+                                    <p  class="contenido3">El volumen venta es:</p>
+                                </div>
+                                <div class="col-6 d-flex justify-content-center border border-dark border-3 " style="background-color: #E3F2FD;">
+                                    <p id="volumenVentasDiesel" class="contenido3" style="color: black;"></p>
+                                </div>
+                                <div class="col-6 d-flex justify-content-center border border-dark border-3" style="background-color: #0a0908;">
+                                    <p  class="contenido3">El importe venta es:</p>
+                                </div>
+                                <div class="col-6 d-flex justify-content-center border border-dark border-3 " style="background-color: #E3F2FD;">
+                                    <p id="importeVentasDiesel" class="contenido3" style="color: black;"></p>
+                                 </div>
+                            </div>
+                        </div>
+                </div>  
+            </div> 
+                <div class="col-md-12 mt-3">
+                    <div class="row justify-content-around g-2">
+                        <div class="col-md-4 d-flex justify-content-center border border-dark border-3 rounded-4" style="background-color: #72ddf7; font-family:sans-serif ;"> <!-- Cambiado a col-md-4 espacio mas pequeño -->
+                            <h4 class="contenido" style="color: black;">RFC del contribuyente:</h4>
+                        </div>
+                        <div class="col-md-8"> <!-- Cambiado a col-md-8 espacio mas grande-->
+                            <div class="row justify-content-around">
+                                <div class="d-flex justify-content-center">
+                                    <textarea id="rfcContribuyente" class="form-control" style="background-color: #E3F2FD;" rows="2" id="comment" name="text"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <div class="row justify-content-around g-2">
+                        <div class="col-md-4 d-flex justify-content-center border border-dark border-3 rounded-4 " style="background-color: #72ddf7; font-family: sans-serif;"> 
+                            <h4  class="contenido" style="color: black ;">RFC del proveedor:</h4>
+                        </div>
+                        <div class="col-md-8"> 
+                            <div class="row justify-content-around">
+                                <div class="d-flex justify-content-center">
+                                   <textarea id="rfcProveedor" class="form-control" style="background-color: #E3F2FD;" rows="2" id="comment" name="text"></textarea>
+                             </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mt-3">
+                    <div class="row justify-content-around g-2">
+                        <div class="col-md-4 d-flex justify-content-center border border-dark border-3 rounded-4 " style="background-color: #72ddf7; font-family: sans-serif;"> 
+                            <h4  class="contenido" style="color: black ;">Permiso CRE:</h4>
+                        </div>
+                        <div class="col-md-8"> 
+                            <div class="row justify-content-around">
+                                <div class="d-flex justify-content-center">
+                                   <textarea id="numPermiso" class="form-control" style="background-color: #E3F2FD;" rows="2" id="comment" name="text"></textarea>
+                             </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mt-3">
+                    <div class="row justify-content-around g-2">
+                        <div class="col-md-4 d-flex justify-content-center border border-dark border-3 rounded-4 " style="background-color: #72ddf7; font-family: sans-serif;"> 
+                            <h4  class="contenido" style="color: black ;">Caracter:</h4>
+                        </div>
+                        <div class="col-md-8"> 
+                            <div class="row justify-content-around">
+                                <div class="d-flex justify-content-center">
+                                   <textarea id="caracterPermisos" class="form-control" style="background-color: #E3F2FD;" rows="2" id="comment" name="text"></textarea>
+                             </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mt-3">
+                    <div class="row justify-content-around g-2">
+                        <div class="col-md-4 d-flex justify-content-center border border-dark border-3 rounded-4 " style="background-color: #72ddf7; font-family: sans-serif;"> 
+                            <h4  class="contenido" style="color: black ;">Numero de dispensarios:</h4>
+                        </div>
+                        <div class="col-md-8"> 
+                            <div class="row justify-content-around">
+                                <div class="d-flex justify-content-center">
+                                   <textarea id="numeroDispensarios" class="form-control" style="background-color: #E3F2FD;" rows="2" id="comment" name="text"></textarea>
+                             </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="col-md-12 mt-3">
+                <div class="row justify-content-around g-2">
+                    <div class="col-md-4 d-flex justify-content-center border border-dark border-3 rounded-4" style="background-color: #72ddf7; font-family: sans-serif ;"> 
+                        <h4  class="contenido" style="color: black ;">Nombre del archivo:</h4>
+                    </div>
+                    <div class="col-md-8"> 
+                        <div class="row justify-content-around">
+                            <div class="d-flex justify-content-center">
+                                <textarea id="nombreArchivoImpreso" class="form-control" style="background-color: #E3F2FD;" rows="2" id="comment" name="text"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- TABLA DE ERRORES EN EL NOMBRE DEL ARCHIVO -->
+            <!-- <div class="container row d-flex justify-content-center " >
+                <section class="tabla mt-5 border rounded-3" style="max-width: 600px; background-color: #E3F2FD;">
+                    <div class=" col-md-12 mt-3">
+                        <div class="celda fw-bold border rounded-2 d-flex justify-content-center  mt-3 p-2 fs-4 " style="background-color: #72ddf7; color: #0a0908; font-family: sans-serif;">ERRORES EN EL NOMBRE DEL JSON</div>
+                        <div class="celda fw-bold border rounded-2 d-flex justify-content-start mt-3 p-2" style="background-color: #d90429; font-family: sans-serif;">Dato 1</div>
+                        <div class="celda fw-bold border rounded-2 d-flex justify-content-start mt-3 p-2" style="background-color: #d90429; font-family: sans-serif;">Dato 2</div>
+                        <div class="celda fw-bold border rounded-2 d-flex justify-content-start mt-3 p-2" style="background-color: #d90429; font-family: sans-serif;">Dato 3</div>
+                        <div class="celda fw-bold border rounded-2 d-flex justify-content-start mt-3 p-2" style="background-color: #d90429; font-family: sans-serif;">Dato 4</div>
+                        <div class="celda fw-bold border rounded-2 d-flex justify-content-start mt-3 p-2" style="background-color: #d90429; font-family: sans-serif;">Dato 5</div>
+                        <div class="celda fw-bold border rounded-2 d-flex justify-content-start mt-3 mb-3 p-2" style="background-color: #d90429; font-family: sans-serif;">Dato 6</div>
+                    </div>
+                </section>
+            </div> -->
+
+            
+    </div>
+    <!-- Contenedor que enseña los errores en los datos del nombre JSON en caso de que existan -->
+    <div class="container mt-5 mb-5 col-sm-8 col-md-8 col-lg-10 mt-3 ">
+        <!-- TABLA DE ERRORES EN EL NOMBRE DEL ARCHIVO -->
+        <div class="container row d-flex justify-content-center">
+            <!-- id para ocultar componentes hasta que exista errores -->
+            <section id="tablaErroresNombreJson" class="oculto tabla mt-5 border rounded-3" style="max-width: 600px; background-color: #E3F2FD;">
+                <div class="col-md-12 mt-3">
+                    <div class="celda fw-bold border rounded-2 d-flex justify-content-center mt-3 mb-3 p-2 fs-4" style="background-color: #72ddf7; color: #0a0908; font-family: sans-serif;">
+                        ERRORES EN EL NOMBRE DEL JSON
+                    </div>
+                    <!-- Aquí vamos a agregar los errores dinámicamente -->
+                    <div id="camposTablaErroresNombreJson" class="errores-lista"></div>
+                </div>
+            </section>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <button id="botonReiniciarPagina" type="button" class="mt-3 btn btn-outline-dark btn-lg border border-3 border-white oculto" onclick="actualizarPagina()" style="color: white; font-family: sans-serif;">Reiniciar</button>
+        </div>
+    </div>
+
+    <script src="alert.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <footer class="footer text-bg-white d-flex flex-column align-items-center" style="background-color: black; position: fixed; bottom: 0; left: 0; right: 0; padding: 5px 0;">
+        <p class="position-absolute start-0 fw-bold p-3" style="font-family: sans-serif; font-size: 0.8rem; margin-top: 0; color: white;">DEPARTAMENTO CONTABILIDAD-SISTEMAS</p>
+        <img class="footer-logo p-0 fs-1" src="logo/FG_GASOLINERAS-4.jpeg" alt="logoFullgas">
+    </footer>
+
+</body>
+</html>
