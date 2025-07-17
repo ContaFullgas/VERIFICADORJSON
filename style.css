@@ -90,16 +90,7 @@
     background-color:#5dade2 ;
     /* border: 4px solid #0a0908; Borde de 4px  */
   }
- /* Agrega animación de rotación */
-/*@keyframes rotate {
-  0% { transform: rotate(0deg); }*/
- /* 100% { transform: rotate(360deg); }*/
-/*}*/
 
-/*.swal2-icon {
-  animation: rotate 2s ease-in-out;
-
-}*/
 .celda:hover {
   background-color: #0582CA!important; /* Cambiar el fondo al pasar el mouse */
   color: #ffffff !important; /* Cambiar el color del texto */
@@ -108,7 +99,7 @@
 }
 
 body{
-  height: 230vh;
+  padding-bottom: 100px; /* Deja espacio para que no se tape el botón */
 }
 
 .footer-logo {
@@ -122,4 +113,25 @@ body{
   .footer-logo {
     width: 100px; /* Para pantallas más pequeñas, puedes establecer un tamaño fijo */
   }
+}
+
+#tablaRecepciones th,
+#tablaRecepciones td {
+  /* border: 1px solid #ccc; */
+  padding: 10px;
+  text-align: center;
+  font-family: sans-serif;
+  vertical-align: middle;
+}
+
+#tablaRecepciones {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#tablaRecepciones th,
+#tablaRecepciones td {
+  border: 1px solid #ccc; /* Color y grosor de línea interior */
 }

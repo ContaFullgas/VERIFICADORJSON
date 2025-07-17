@@ -302,30 +302,49 @@ function accederAlZipYLeerJson()
                         tablaDatosJson.classList.remove("oculto");
                         botonReiniciarPagina.classList.remove("oculto");
 
-                        // sumaVolumenCompras.classList.remove("oculto");
-                        // sumaVolumenVentas.classList.remove("oculto");
-                        // sumaImporteVentas.classList.remove("oculto");
-                        
-                        // dieselTitulo.classList.remove("oculto");
-                        // volumenComprasDieselImpresion.classList.remove('oculto');
-                        // volumenVentasDieselImpresion.classList.remove('oculto');
-                        // importeVentasDieselImpresion.classList.remove('oculto');
+                        // Vaciar cuerpo de tabla por si se procesa otro archivo
+                        const tbody = document.querySelector("#tablaRecepciones tbody");
+                        tbody.innerHTML = "";
 
-                        // magnaTitulo.classList.remove("oculto");
-                        // volumenComprasMagnaImpresion.classList.remove('oculto');
-                        // volumenVentasMagnaImpresion.classList.remove('oculto');
-                        // importeVentasMagnaImpresion.classList.remove('oculto');
+                        // Recorrer cada producto
+                        data.Producto.forEach(producto => {
+                        const marca = producto.MarcaComercial;
+                        const recepciones = producto.ReporteDeVolumenMensual?.Recepciones?.Complemento || [];
 
-                        // premiumTitulo.classList.remove("oculto");
-                        // volumenComprasPremiumImpresion.classList.remove('oculto');
-                        // volumenVentasPremiumImpresion.classList.remove('oculto');
-                        // importeVentasPremiumImpresion.classList.remove('oculto');
-                        
-                        // rfcContribuyenteImpresion.classList.remove("oculto");
-                        // rfcProveedorImpresion.classList.remove("oculto");
-                        // nombreArchivoImpreso.classList.remove("oculto");
+                        recepciones.forEach(complemento => {
+                            const nacionales = complemento.Nacional || [];
+                            nacionales.forEach(nacional => {
+                            const cfdis = nacional.CFDIs || [];
+                            cfdis.forEach(cfdi => {
+                                const tr = document.createElement("tr");
 
-                        //botonLimpiar.classList.remove("oculto");
+                                const tdMarca = document.createElement("td");
+                                tdMarca.textContent = marca;
+                                tr.appendChild(tdMarca);
+
+                                const tdCfdi = document.createElement("td");
+                                tdCfdi.textContent = cfdi.Cfdi || "";
+                                tr.appendChild(tdCfdi);
+
+                                const tdPrecioCompra = document.createElement("td");
+                                tdPrecioCompra.textContent = cfdi.PrecioCompra ?? "";
+                                tr.appendChild(tdPrecioCompra);
+
+                                const tdTipoCfdi = document.createElement("td");
+                                tdTipoCfdi.textContent = cfdi.TipoCfdi ?? "";
+                                tr.appendChild(tdTipoCfdi);
+
+                                const tdVolumen = document.createElement("td");
+                                tdVolumen.textContent = cfdi.VolumenDocumentado?.ValorNumerico ?? "";
+                                tr.appendChild(tdVolumen);
+
+                                tbody.appendChild(tr);
+                                });
+
+                            });
+                        });
+                        });
+
                     } 
                     else 
                     {

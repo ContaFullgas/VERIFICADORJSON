@@ -38,7 +38,7 @@
         <!-- <label for="photos">Seleccionar imágenes</label> -->
         <!--  -->
     </div>    
-    
+
     <!-- contenedor que muestra los datos de las tablas si el JSON es correcto -->
     <div id="tablaDatosJson" class="container mt-5 mb-5 col-sm-8 col-md-8 col-lg-10 mt-3 oculto">
 
@@ -221,21 +221,26 @@
                     </div>
                 </div>
             </div>
-            <!-- TABLA DE ERRORES EN EL NOMBRE DEL ARCHIVO -->
-            <!-- <div class="container row d-flex justify-content-center " >
-                <section class="tabla mt-5 border rounded-3" style="max-width: 600px; background-color: #E3F2FD;">
-                    <div class=" col-md-12 mt-3">
-                        <div class="celda fw-bold border rounded-2 d-flex justify-content-center  mt-3 p-2 fs-4 " style="background-color: #72ddf7; color: #0a0908; font-family: sans-serif;">ERRORES EN EL NOMBRE DEL JSON</div>
-                        <div class="celda fw-bold border rounded-2 d-flex justify-content-start mt-3 p-2" style="background-color: #d90429; font-family: sans-serif;">Dato 1</div>
-                        <div class="celda fw-bold border rounded-2 d-flex justify-content-start mt-3 p-2" style="background-color: #d90429; font-family: sans-serif;">Dato 2</div>
-                        <div class="celda fw-bold border rounded-2 d-flex justify-content-start mt-3 p-2" style="background-color: #d90429; font-family: sans-serif;">Dato 3</div>
-                        <div class="celda fw-bold border rounded-2 d-flex justify-content-start mt-3 p-2" style="background-color: #d90429; font-family: sans-serif;">Dato 4</div>
-                        <div class="celda fw-bold border rounded-2 d-flex justify-content-start mt-3 p-2" style="background-color: #d90429; font-family: sans-serif;">Dato 5</div>
-                        <div class="celda fw-bold border rounded-2 d-flex justify-content-start mt-3 mb-3 p-2" style="background-color: #d90429; font-family: sans-serif;">Dato 6</div>
-                    </div>
-                </section>
-            </div> -->
-
+            
+            <div class="row  mt-1 mt-4 g-1  border border-3 border-dark p-2 rounded-4" style="background-color: #0a0908;">
+            <div class="h-70 row  mt-1 g-1  p-2 border rounded-4" style="background-color: #0582CA;">
+                <div id="contenedorTablaRecepciones" style="margin-top: 5px;" class="mb-5">
+                    <h2 class="textborder col-12 text-center mt-1 mb-4 fw-bold" style="font-family:sans-serif ; color: #2b2c28 ; ">DETALLE RECEPCIONES</h2>
+                    <table  style="border-collapse: collapse; width: 100%;" id="tablaRecepciones">
+                            <thead style="background-color: #72ddf7; color: #000;">
+                            <tr>
+                                <th>COMBUSTIBLE</th>
+                                <th>CFDI</th>
+                                <th>PRECIO COMPRA</th>
+                                <th>TIPO CFDI</th>
+                                <th>VOLUMEN RECEPCIONES</th>
+                            </tr>
+                            </thead>
+                            <tbody style="color: black; background-color: #E3F2FD;"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
             
     </div>
     <!-- Contenedor que enseña los errores en los datos del nombre JSON en caso de que existan -->
@@ -254,8 +259,10 @@
             </section>
         </div>
 
-        <div class="d-flex justify-content-center">
-            <button id="botonReiniciarPagina" type="button" class="mt-3 btn btn-outline-dark btn-lg border border-3 border-white oculto" onclick="actualizarPagina()" style="color: white; font-family: sans-serif;">Reiniciar</button>
+        
+
+        <div class="d-flex justify-content-center ">
+            <button id="botonReiniciarPagina" type="button" class="btn btn-outline-dark btn-lg border border-3 border-white oculto" onclick="actualizarPagina()" style="color: white; font-family: sans-serif;">Reiniciar</button>
         </div>
     </div>
 
