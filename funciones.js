@@ -302,49 +302,72 @@ function accederAlZipYLeerJson()
                         tablaDatosJson.classList.remove("oculto");
                         botonReiniciarPagina.classList.remove("oculto");
 
-                        // Vaciar cuerpo de tabla por si se procesa otro archivo
+                        // Limpias primero los cuerpos de ambas tablas para no duplicar datos si cargas otro archivo
                         const tbody = document.querySelector("#tablaRecepciones tbody");
                         tbody.innerHTML = "";
 
-                        // Recorrer cada producto
+                        // const tbodyExistencias = document.querySelector("#tablaExistencias tbody");
+                        // tbodyExistencias.innerHTML = "";
+
+                        // Aquí recorres los productos para llenar la tabla de recepciones
                         data.Producto.forEach(producto => {
-                        const marca = producto.MarcaComercial;
-                        const recepciones = producto.ReporteDeVolumenMensual?.Recepciones?.Complemento || [];
+                            const marca = producto.MarcaComercial ?? 'DESCONOCIDA';
+                            const recepciones = producto.ReporteDeVolumenMensual?.Recepciones?.Complemento || [];
 
-                        recepciones.forEach(complemento => {
-                            const nacionales = complemento.Nacional || [];
-                            nacionales.forEach(nacional => {
-                            const cfdis = nacional.CFDIs || [];
-                            cfdis.forEach(cfdi => {
-                                const tr = document.createElement("tr");
+                            recepciones.forEach(complemento => {
+                                const nacionales = complemento.Nacional || [];
+                                nacionales.forEach(nacional => {
+                                    const cfdis = nacional.CFDIs || [];
+                                    cfdis.forEach(cfdi => {
+                                        const tr = document.createElement("tr");
 
-                                const tdMarca = document.createElement("td");
-                                tdMarca.textContent = marca;
-                                tr.appendChild(tdMarca);
+                                        const tdMarca = document.createElement("td");
+                                        tdMarca.textContent = marca;
+                                        tr.appendChild(tdMarca);
 
-                                const tdCfdi = document.createElement("td");
-                                tdCfdi.textContent = cfdi.Cfdi || "";
-                                tr.appendChild(tdCfdi);
+                                        const tdCfdi = document.createElement("td");
+                                        tdCfdi.textContent = cfdi.Cfdi || "";
+                                        tr.appendChild(tdCfdi);
 
-                                const tdPrecioCompra = document.createElement("td");
-                                tdPrecioCompra.textContent = cfdi.PrecioCompra ?? "";
-                                tr.appendChild(tdPrecioCompra);
+                                        const tdPrecioCompra = document.createElement("td");
+                                        tdPrecioCompra.textContent = cfdi.PrecioCompra ?? "";
+                                        tr.appendChild(tdPrecioCompra);
 
-                                const tdTipoCfdi = document.createElement("td");
-                                tdTipoCfdi.textContent = cfdi.TipoCfdi ?? "";
-                                tr.appendChild(tdTipoCfdi);
+                                        const tdTipoCfdi = document.createElement("td");
+                                        tdTipoCfdi.textContent = cfdi.TipoCfdi ?? "";
+                                        tr.appendChild(tdTipoCfdi);
 
-                                const tdVolumen = document.createElement("td");
-                                tdVolumen.textContent = cfdi.VolumenDocumentado?.ValorNumerico ?? "";
-                                tr.appendChild(tdVolumen);
+                                        const tdVolumen = document.createElement("td");
+                                        tdVolumen.textContent = cfdi.VolumenDocumentado?.ValorNumerico ?? "";
+                                        tr.appendChild(tdVolumen);
 
-                                tbody.appendChild(tr);
+                                        tbody.appendChild(tr);
+                                    });
                                 });
-
                             });
                         });
-                        });
 
+                        // Aquí recorres los productos para llenar la tabla de existencias
+                        // ===== Tabla de Volumen de Existencias por Producto =====
+                        const tbodyExistencias = document.querySelector("#tablaExistencias tbody");
+                        tbodyExistencias.innerHTML = ""; // Limpiar antes de insertar
+
+                        data.Producto.forEach(producto => {
+                        const marca = producto.MarcaComercial ?? 'DESCONOCIDA';
+                        const volumenExistencias = producto.ReporteDeVolumenMensual?.ControlDeExistencias?.VolumenExistenciasMes ?? '';
+
+                        const tr = document.createElement("tr");
+
+                        const tdMarca = document.createElement("td");
+                        tdMarca.textContent = marca;
+                        tr.appendChild(tdMarca);
+
+                        const tdExistencias = document.createElement("td");
+                        tdExistencias.textContent = volumenExistencias;
+                        tr.appendChild(tdExistencias);
+
+                        tbodyExistencias.appendChild(tr);
+                        });
                     } 
                     else 
                     {

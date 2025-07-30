@@ -116,7 +116,9 @@ body{
 }
 
 #tablaRecepciones th,
-#tablaRecepciones td {
+#tablaRecepciones td,
+#tablaExistencias th,
+#tablaExistencias td{
   /* border: 1px solid #ccc; */
   padding: 10px;
   text-align: center;
@@ -124,7 +126,8 @@ body{
   vertical-align: middle;
 }
 
-#tablaRecepciones {
+#tablaRecepciones,
+#tablaExistencias {
   border-collapse: collapse;
   width: 100%;
   margin-top: 10px;
@@ -132,6 +135,8 @@ body{
 }
 
 #tablaRecepciones th,
-#tablaRecepciones td {
+#tablaRecepciones td,
+#tablaExistencias th,
+#tablaExistencias td {
   border: 1px solid #ccc; /* Color y grosor de línea interior */
 }
