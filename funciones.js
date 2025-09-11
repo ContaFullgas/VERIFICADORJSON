@@ -306,6 +306,10 @@ function accederAlZipYLeerJson()
                         const tbody = document.querySelector("#tablaRecepciones tbody");
                         tbody.innerHTML = "";
 
+                        // Acumuladores para totales de "DETALLE RECEPCIONES"
+                        let totalCfdis = 0;
+                        let totalVolumenRecepciones = 0;
+
                         // const tbodyExistencias = document.querySelector("#tablaExistencias tbody");
                         // tbodyExistencias.innerHTML = "";
 
@@ -341,11 +345,39 @@ function accederAlZipYLeerJson()
                                         tdVolumen.textContent = cfdi.VolumenDocumentado?.ValorNumerico ?? "";
                                         tr.appendChild(tdVolumen);
 
+                                        // Acumular totales
+                                        totalCfdis++;
+                                        const v = Number(cfdi?.VolumenDocumentado?.ValorNumerico ?? 0);
+                                        if (!Number.isNaN(v)) totalVolumenRecepciones += v;
+
                                         tbody.appendChild(tr);
                                     });
                                 });
                             });
                         });
+
+                        // ===== Fila de totales al final de DETALLE RECEPCIONES =====
+                        const trTotales = document.createElement("tr");
+
+                        // Celda texto (combina primeras 4 columnas)
+                        const tdLabel = document.createElement("td");
+                        tdLabel.colSpan = 4;
+                        tdLabel.textContent = `Total CFDIs: ${totalCfdis}`;
+                        tdLabel.style.fontWeight = "bold";
+                        tdLabel.style.textAlign = "right";
+                        trTotales.appendChild(tdLabel);
+
+                        // Celda suma de volumen (última columna)
+                        const tdSumaVol = document.createElement("td");
+                        // Formato con separador y hasta 3 decimales, ajusta si necesitas más/menos
+                        tdSumaVol.textContent = totalVolumenRecepciones.toLocaleString('es-MX', { maximumFractionDigits: 3 });
+                        tdSumaVol.style.fontWeight = "bold";
+                        tdSumaVol.style.textAlign = "right";
+                        trTotales.appendChild(tdSumaVol);
+
+                        // Añadir al final del tbody de la tabla de recepciones
+                        tbody.appendChild(trTotales);
+
 
                         // Aquí recorres los productos para llenar la tabla de existencias
                         // ===== Tabla de Volumen de Existencias por Producto =====

@@ -140,3 +140,14 @@ body{
 #tablaExistencias td {
   border: 1px solid #ccc; /* Color y grosor de línea interior */
 }
+
+/* Centra la última columna de la tabla de DETALLE RECEPCIONES */
+  #tablaRecepciones th:last-child,
+  #tablaRecepciones td:last-child {
+    text-align: center !important;
+  }
+
+  /* Centra la primera celda de la última fila (la del "Total CFDIs") */
+  #tablaRecepciones tbody tr:last-child td:first-child { 
+    text-align: center !important; 
+  }
