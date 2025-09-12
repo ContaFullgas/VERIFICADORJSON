@@ -174,7 +174,7 @@ function validarNombreDeArchivoZip()
         var text = "";
         // Se recorre el arreglo de errores y se agregan las filas
         for (var i = 0; i < arrayErroresNombreArchivo.length; i++) {
-            text += '<div class="celda fw-bold border rounded-2 d-flex justify-content-start mt-3 mb-3 p-2" style="background-color: #d90429; font-family: sans-serif;">' + arrayErroresNombreArchivo[i] + '</div>';
+            text += '<div class="celda fw-bold border rounded-2 d-flex justify-content-start mt-3 mb-3 p-2" style="background-color: #ffffffff; font-family: sans-serif;">' + arrayErroresNombreArchivo[i] + '</div>';
         }
         // Insertar los errores en la tabla
         document.getElementById("camposTablaErroresNombreJson").innerHTML = text;
