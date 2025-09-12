@@ -1286,3 +1286,15 @@ background: linear-gradient(135deg,
   transform: translateX(6px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
+
+
+/* Centra la última columna de la tabla de DETALLE RECEPCIONES */
+  #tablaRecepciones th:last-child,
+  #tablaRecepciones td:last-child {
+    text-align: center !important;
+  }
+
+  /* Centra la primera celda de la última fila (la del "Total CFDIs") */
+  #tablaRecepciones tbody tr:last-child td:first-child { 
+    text-align: center !important; 
+  }
