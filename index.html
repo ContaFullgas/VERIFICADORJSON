@@ -17,6 +17,9 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <script src="funciones.js" defer></script>
     <title>PROGRAMA JSON</title>
   </head>
@@ -39,10 +42,10 @@
       </div>
     </header>
 
-    <div
-      id="dropArea"
-      class="container mt-5 mb-5 col-sm-8 col-md-8 col-lg-10 mt-3"
-    >
+      <div
+        id="dropArea"
+        class="container mt-5 mb-5 col-sm-8 col-md-8 col-lg-10 mt-3"
+      >
       <div class="main-card">
         <div class="upload-zone" id="dropAreaEstilos">
           <div class="upload-icon">📁</div>
@@ -330,11 +333,7 @@
 </div>
 
 
-
-
-
-
-   <div class="boton-container">
+<div class="boton-container">
     <button
         id="botonReiniciarPagina"
         type="button"
@@ -344,12 +343,58 @@
         <i class="fas fa-redo-alt"></i>
         Reiniciar
     </button>
+    
+    <button
+  id="botonDescargarPDF"
+  type="button"
+  class="btn-descargar oculto"
+>
+  <i class="fas fa-file-pdf"></i>
+  Descargar PDF
+</button>
+
 </div>
+
     </div>
 
-    <script src="alert.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+   document.getElementById("botonDescargarPDF").addEventListener("click", () => {
+  const element = document.getElementById("tablaDatosJson");
+
+  const style = document.createElement('style');
+  style.id = 'pdf-export-style';
+  style.innerHTML = `
+    #tablaDatosJson { font-size: 9px !important; background: white !important; color: black !important; }
+    #tablaDatosJson th { background-color: #f2f2f2 !important; color: black !important; padding: 4px !important; font-size: 8px !important; }
+    #tablaDatosJson td { padding: 4px !important; font-size: 7px !important; word-break: break-word !important; }
+    .card { box-shadow: none !important; }
+  `;
+  document.head.appendChild(style);
+
+  element.style.overflow = "visible";
+  element.style.height = "auto";
+
+  const opt = {
+    margin: 10,
+    filename: "reporte-combustibles.pdf",
+    image: { type: "jpeg", quality: 1.0 },
+    html2canvas: { scale: 3, useCORS: true, scrollY: 0, letterRendering: true, backgroundColor: "#FFFFFF" },
+    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    pagebreak: { mode: ["avoid-all", "css", "legacy"] }
+  };
+
+  html2pdf().set(opt).from(element).save().then(() => {
+    document.getElementById("pdf-export-style").remove();
+  });
+});
+
+  </script>
+  
     <footer class="custom-footer">
       <p class="footer-text">DEPARTAMENTO CONTABILIDAD-SISTEMAS</p>
     </footer>

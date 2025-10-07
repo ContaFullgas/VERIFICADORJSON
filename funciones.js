@@ -301,6 +301,7 @@ function accederAlZipYLeerJson()
                         // fechaDelArchivo.classList.remove("oculto");
                         tablaDatosJson.classList.remove("oculto");
                         botonReiniciarPagina.classList.remove("oculto");
+                        botonDescargarPDF.classList.remove("oculto"); 
 
                         // Limpias primero los cuerpos de ambas tablas para no duplicar datos si cargas otro archivo
                         const tbody = document.querySelector("#tablaRecepciones tbody");
@@ -534,3 +535,24 @@ function contarCaracteresClaves(cadena)
         return false;
     }
 }
+
+
+const { jsPDF } = window.jspdf;
+
+document.getElementById("botonDescargarPDF").addEventListener("click", () => {
+    const doc = new jsPDF("p", "pt", "a4");
+    const element = document.getElementById("tablaDatosJson");
+
+    doc.html(element, {
+        callback: function (doc) {
+            doc.save("reporte-combustibles.pdf");
+        },
+        margin: [20, 20, 20, 20],
+        autoPaging: 'slice',   // 👈 fuerza a dividir el contenido en varias páginas
+        x: 0,
+        y: 0,
+        width: 560,            // ancho disponible en A4 (595pt - márgenes)
+        windowWidth: element.scrollWidth,  // 👈 asegura que tome el ancho real del div
+        avoid: '.claseSinCorte'
+    });
+});
